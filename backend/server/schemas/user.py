@@ -17,4 +17,14 @@ class UserCreate(BaseModel):
 
 
 class UserUpdate(BaseModel):
-    pass
+    first_name: str
+    second_name: str
+    stack: list
+    roles: list
+    about: str
+    exp_work: str
+    hackathons: dict
+    GitHub: str
+    link_tg: str
+    exp: int
+    who_is: bool

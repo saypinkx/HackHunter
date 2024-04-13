@@ -31,7 +31,7 @@ async def update_user(chat_id: Annotated[int, Path()], schema: Annotated[UserUpd
     user = await User.get(chat_id)
     parameters = schema.dict()
     if not user:
-        raise HTTPException(status_code=404, detail='User with login not found')
+        raise HTTPException(status_code=404, detail='User with chat_id not found')
     await user.update(parameters=parameters)
     return 'OK'
 
@@ -40,6 +40,6 @@ async def update_user(chat_id: Annotated[int, Path()], schema: Annotated[UserUpd
 async def delete_user(chat_id: Annotated[int, Path()]):
     user = await User.get(chat_id)
     if not user:
-        raise HTTPException(status_code=404, detail='User with login not found')
+        raise HTTPException(status_code=404, detail='User with chat_id not found')
     await user.delete()
     return 'OK'
