@@ -8,7 +8,7 @@ services:
     env_file:
       - server/.env-prod
     volumes:
-      - data:/db
+      - db:/db
   server:
     build:
       context: server
@@ -27,4 +27,6 @@ services:
 #    env_file:
 #      - client/.env-prod
 #    container_name: bot
+volumes:
+  db:
 
