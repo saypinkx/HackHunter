@@ -18,13 +18,13 @@ services:
       - 8000:8000
     depends_on:
       - mongodb
-#  bot:
-#    build:
-#      context: client
-#      dockerfile: Dockerfile
-#    env_file:
-#      - client/.env-prod
-#    container_name: bot
+  bot:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    env_file:
+      - client/.env-prod
+    container_name: bot
 volumes:
   db:
 
