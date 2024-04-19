@@ -9,7 +9,7 @@ class UserCreate(BaseModel):
     roles: list
     about: str
     exp_work: str
-    hackathons: dict
+    hackathons: list[dict]
     GitHub: str
     link_tg: str
     exp: int
