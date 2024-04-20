@@ -28,8 +28,13 @@ class User:
         return cls(parameters=user_dict)
 
     @classmethod
-    async def all(cls):
-        users_dicts = cls.users.find()
+    async def all(cls, **parameters):
+        query = dict()
+        for key in parameters:
+            if parameters[key] is not None:
+                query[key] = parameters[key]
+
+        users_dicts = cls.users.find(query)
         users = []
         async for user_dict in users_dicts:
             users.append(cls(parameters=user_dict))

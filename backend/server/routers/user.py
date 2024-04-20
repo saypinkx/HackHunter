@@ -27,8 +27,8 @@ async def create_user(schema: Annotated[UserCreate, Body()]):
 
 
 @user_router.get('', status_code=200)
-async def get_all_users():
-    users = await User.all()
+async def get_all_users(who_is: Annotated[bool, Query()] = None):
+    users = await User.all(who_is=who_is)
     return users
 
 
@@ -49,5 +49,4 @@ async def delete_user(chat_id: Annotated[int, Path()]):
         raise HTTPException(status_code=404, detail='User with chat_id not found')
     await user.delete()
     return 'OK'
-
 
