@@ -7,7 +7,7 @@ from aiogram.dispatcher.filters import Text, Command
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import markups
 from responses import response
-
+print(TOKEN_BOT)
 # types.ContentType.AUDIO
 # from aiogram.utils.exceptions
 # Включаем логирование, чтобы не пропустить важные сообщения
