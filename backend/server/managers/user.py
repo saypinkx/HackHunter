@@ -27,6 +27,14 @@ class User:
             return None
         return cls(parameters=user_dict)
 
+    @classmethod
+    async def all(cls):
+        users_dicts = cls.users.find()
+        users = []
+        async for user_dict in users_dicts:
+            users.append(cls(parameters=user_dict))
+        return users
+
     async def add(self):
         await self.users.insert_one(self.__dict__)
         print()

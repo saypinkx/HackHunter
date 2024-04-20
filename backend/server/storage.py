@@ -3,12 +3,14 @@
 import boto3
 from config import aws_access_key_id, aws_secret_access_key
 
-session = boto3.session.Session()
-s3 = session.client(
-    service_name='s3',
-    endpoint_url='https://storage.yandexcloud.net', region_name='ru-central1',
-    aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key
-)
+
+#
+# session = boto3.session.Session()
+# s3 = session.client(
+#     service_name='s3',
+#     endpoint_url='https://storage.yandexcloud.net', region_name='ru-central1',
+#     aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key
+# )
 
 
 # # Создать новый бакет
@@ -16,21 +18,16 @@ s3 = session.client(
 
 
 class Storage:
-    def __init___(self):
+    def __init__(self):
         self.session = boto3.session.Session().client(service_name='s3',
-                                                      endpoint_url='https://storage.yandexcloud.net',
-                                                      region_name='ru-central1',
-                                                      aws_access_key_id=aws_access_key_id,
-                                                      aws_secret_access_key=aws_secret_access_key)
+                                      endpoint_url='https://storage.yandexcloud.net',
+                                      region_name='ru-central1',
+                                      aws_access_key_id=aws_access_key_id,
+                                      aws_secret_access_key=aws_secret_access_key)
 
 
-class Bucket:
-    def __init__(self, bucket_name):
-        self.name = bucket_name
-
-
-
-session = Storage().session
+storage = Storage()
+session = storage.session
 
 # # Загрузить объекты в бакет
 #
