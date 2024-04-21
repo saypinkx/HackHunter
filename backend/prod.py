@@ -9,7 +9,6 @@ while True:
     # Проверка наличия нового коммита
     new =subprocess.call(["git", "pull", "origin", "master"])
     if new:
-
         # Есть новый коммит
         print("Обнаружен новый коммит. Применяем изменения...")
         time.sleep(5)
