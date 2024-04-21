@@ -7,7 +7,6 @@ while True:
 
     # Проверка наличия нового коммита
     new = str(subprocess.check_output(["git", "pull", "origin", "master"]))
-    print(new)
     if "Already up to date" not in new:
         # Есть новый коммит
         print("Обнаружен новый коммит. Применяем изменения...")
