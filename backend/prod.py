@@ -9,13 +9,20 @@ while True:
 
     # Проверка наличия нового коммита
     new_commits = subprocess.check_output(["git", "fetch", "--all"]).decode("utf-8")
-    if new_commits:
-        if current_commit not in new_commits:
-        # Есть новый коммит
-            print("Обнаружен новый коммит. Запуск сборки Docker Compose...")
+    if current_commit not in new_commits:
 
-        # Запуск сборки Docker Compose
-            subprocess.check_call(["docker-compose", "up", "-d", "--no-deps", "--build"])
+        # Есть новый коммит
+        print(f'current:{current_commit}, new:{new_commits}')
+        print("Обнаружен новый коммит. Применяем изменения...")
+
+        # Применение новых коммитов
+        subprocess.check_call(["git", "pull", "origin", "master"])
+
+        # Пересборка Docker Compose
+        print("Пересобираем Docker Compose...")
+        subprocess.check_call(["docker-compose", "up", "-d", "--no-deps", "--build"])
+    else:
+        print("Нет новых коммитов. Ожидание...")
 
     # Ожидание изменений в репозитории
     time.sleep(5)
