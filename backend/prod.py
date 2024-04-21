@@ -5,18 +5,14 @@ import time
 # Отслеживание изменений в репозитории с помощью Git
 while True:
 
-
     # Проверка наличия нового коммита
-    new = subprocess.check_output(["git", "status", "-uno"])
-    if subprocess.check_call(["git", "diff"]):
-
+    new = str(subprocess.check_output(["git", "status", "-uno"]))
+    if "Changes not staged for commit" not in new:
         # Есть новый коммит
         print("Обнаружен новый коммит. Применяем изменения...")
         time.sleep(5)
         # Применение новых коммитов
-
-
-
+        subprocess.check_call(["git", "pull", "origin", "master"])
         # Пересборка Docker Compose
         print("Пересобираем Docker Compose...")
         subprocess.check_call(["docker-compose", "up", "-d", "--no-deps", "--build"])
