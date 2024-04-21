@@ -6,14 +6,14 @@ import time
 while True:
 
     # Проверка наличия нового коммита
-    new = str(subprocess.check_output(["git", "status", "-uno"]))
+    new = str(subprocess.check_output(["git", "pull", "origin", "master"]))
     print(new)
-    if "nothing to commit" not in new:
+    if "Already up to date" not in new:
         # Есть новый коммит
         print("Обнаружен новый коммит. Применяем изменения...")
+        print(new)
         time.sleep(5)
         # Применение новых коммитов
-        subprocess.check_call(["git", "pull", "origin", "master"])
         # Пересборка Docker Compose
         print("Пересобираем Docker Compose...")
         subprocess.check_call(["docker-compose", "up", "-d", "--no-deps", "--build"])
