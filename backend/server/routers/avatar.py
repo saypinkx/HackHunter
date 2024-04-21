@@ -41,14 +41,6 @@ async def delete_avatar(chat_id: Annotated[int, Path()]):
         raise HTTPException(status_code=500, detail='Storage error')
     return 'Successfully delete avatar'
 
-@avatar_router.delete("2/{chat_id}")
-async def delete_avatar(chat_id: Annotated[int, Path()]):
-    avatars = Avatar.all_keys()
-    if not avatars or str(chat_id) not in avatars:
-        raise HTTPException(status_code=404, detail='avatar with chat_id not found')
-    response = Avatar.delete(chat_id)
-    if response['ResponseMetadata']['HTTPStatusCode'] != 200:
-        raise HTTPException(status_code=500, detail='Storage error')
-    return 'Successfully delete avatar'
+
 
 
