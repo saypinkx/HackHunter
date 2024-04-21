@@ -7,7 +7,8 @@ while True:
 
     # Проверка наличия нового коммита
     new = str(subprocess.check_output(["git", "status", "-uno"]))
-    if "Changes not staged for commit" not in new:
+    print(new)
+    if "nothing to commit" not in new:
         # Есть новый коммит
         print("Обнаружен новый коммит. Применяем изменения...")
         time.sleep(5)
