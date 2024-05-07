@@ -37,7 +37,7 @@ services:
     build:
       context: server
       dockerfile: Dockerfile
-    command: celery -A cel_que:celery worker --loglevel=INFO
+    command: celery -A api.cel_que:celery worker --loglevel=INFO
     ports:
       - 6162:6162
     environment:
@@ -54,7 +54,7 @@ services:
     build:
       context: server
       dockerfile: Dockerfile
-    command: celery -A cel_que:celery flower
+    command: celery -A api.worker:celery flower
     ports:
       - 5555:5555
     depends_on:
