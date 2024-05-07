@@ -48,7 +48,7 @@ services:
       - CELERY_BROKER_TRANSPORT=amqp
       - CELERY_BROKER_CONNECTION_RETRY=True
     depends_on:
-      - server_cfo
+      - server
       - redis
   flower:
     build:
@@ -58,9 +58,9 @@ services:
     ports:
       - 5555:5555
     depends_on:
-      - server_cfo
+      - server
       - redis
-      - celery_worker
+      - worker
     environment:
       - CELERY_BROKER=redis://redis:6379
       - CELERY_RESULT_BACKEND=redis://redis:6379
