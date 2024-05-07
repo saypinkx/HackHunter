@@ -37,7 +37,7 @@ services:
     build:
       context: server
       dockerfile: Dockerfile
-    command: celery -A api.cel_que:celery worker --loglevel=INFO
+    command: celery -A api.worker:celery worker --loglevel=INFO
     ports:
       - 6162:6162
     environment:
