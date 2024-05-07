@@ -1,4 +1,4 @@
-from storage import session
+from api.storage import session
 
 
 class Avatar:

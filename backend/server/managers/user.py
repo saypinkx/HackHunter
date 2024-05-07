@@ -1,5 +1,4 @@
-from database import DB
-from schemas.user import UserCreate
+from api.database import DB
 
 
 class User:

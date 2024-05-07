@@ -6,7 +6,13 @@ services:
       - 27017:27017
     volumes:
       - db:/db
-
+  redis:
+    image: redis:6
+    container_name: redis
+    restart: unless-stopped
+    expose:
+      - 6379
+    command: redis-server /usr/local/etc/redis/redis.conf
   server:
     build:
       context: server
@@ -18,6 +24,7 @@ services:
       - 8000:8000
     depends_on:
       - mongodb
+      - redis
   bot:
     build:
       context: client
@@ -25,6 +32,41 @@ services:
     env_file:
       - client/.env-prod
     container_name: bot
-volumes:
-  db:
+
+  worker:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    command: celery -A cel_que:celery worker --loglevel=INFO
+    ports:
+      - 6162:6162
+    environment:
+      - CELERY_BROKER=redis://redis:6379
+      - CELERY_RESULT_BACKEND=redis://redis:6379
+      - CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP=True
+      - DEBUG=1
+      - CELERY_BROKER_TRANSPORT=amqp
+      - CELERY_BROKER_CONNECTION_RETRY=True
+    depends_on:
+      - server_cfo
+      - redis
+  flower:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    command: celery -A cel_que:celery flower
+    ports:
+      - 5555:5555
+    depends_on:
+      - server_cfo
+      - redis
+      - celery_worker
+    environment:
+      - CELERY_BROKER=redis://redis:6379
+      - CELERY_RESULT_BACKEND=redis://redis:6379
+      - CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP=True
+      - DEBUG=1
+      - CELERY_BROKER_TRANSPORT=amqp
+      - CELERY_BROKER_CONNECTION_RETRY=True
+
 
