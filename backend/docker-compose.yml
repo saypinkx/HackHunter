@@ -44,8 +44,8 @@ services:
     ports:
       - 6162:6162
     environment:
-#      - CELERY_BROKER=redis://62.113.104.103:6379
-#      - CELERY_RESULT_BACKEND=redis://62.113.104.103:6379
+      - CELERY_BROKER=redis://62.113.104.103:6379
+      - CELERY_RESULT_BACKEND=redis://62.113.104.103:6379
       - CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP=True
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
@@ -65,8 +65,8 @@ services:
       - redis
       - worker
     environment:
-#      - CELERY_BROKER=redis://62.113.104.103:6379
-#      - CELERY_RESULT_BACKEND=redis://62.113.104.103:6379
+      - CELERY_BROKER=redis://62.113.104.103:6379
+      - CELERY_RESULT_BACKEND=redis://62.113.104.103:6379
       - CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP=True
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
