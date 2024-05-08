@@ -10,6 +10,8 @@ services:
     image: redis:6
     container_name: redis
     restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
     expose:
       - 6379
     command: redis-server /usr/local/etc/redis/redis.conf
@@ -71,4 +73,4 @@ services:
       - CELERY_BROKER_CONNECTION_RETRY=True
 volumes:
   db:
-
+  redis.conf:
