@@ -1,3 +1,5 @@
+import time
+
 from fastapi import APIRouter, Depends, Body, Path, HTTPException, Query, status
 from typing import Annotated
 from managers.user import User
@@ -37,11 +39,13 @@ async def create_user(schema: Annotated[UserCreate, Body()]):
 @user_router.get('', status_code=200, response_model=list[UserResponse])
 @cache(expire=30)
 async def get_all_users(who_is: Annotated[bool, Query()] = None):
+    time.sleep(3)
     users = await User.all(who_is=who_is)
     return users
 
 
 @user_router.put('/{chat_id}', status_code=200)
+@cache(invalidate="get_all_users")
 async def update_user(chat_id: Annotated[int, Path()], schema: Annotated[UserUpdate, Body()]):
     user = await User.get(chat_id)
     parameters = schema.dict()
@@ -52,6 +56,7 @@ async def update_user(chat_id: Annotated[int, Path()], schema: Annotated[UserUpd
 
 
 @user_router.delete('/{chat_id}', status_code=200)
+@cache(invalidate="get_all_users")
 async def delete_user(chat_id: Annotated[int, Path()]):
     user = await User.get(chat_id)
     if not user:
