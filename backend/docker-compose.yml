@@ -13,6 +13,7 @@ services:
     expose:
       - 6379
     command: redis-server /usr/local/etc/redis/redis.conf
+#    command: redis-server /usr/local/etc/redis/redis.conf
   server:
     build:
       context: server
