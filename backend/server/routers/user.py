@@ -39,7 +39,6 @@ async def create_user(schema: Annotated[UserCreate, Body()]):
 @user_router.get('', status_code=200, response_model=list[UserResponse])
 @cache(expire=30)
 async def get_all_users(who_is: Annotated[bool, Query()] = None):
-    time.sleep(3)
     users = await User.all(who_is=who_is)
     return users
 
