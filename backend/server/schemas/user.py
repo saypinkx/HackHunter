@@ -28,3 +28,17 @@ class UserUpdate(BaseModel):
     link_tg: str
     exp: int
     who_is: bool
+
+class UserResponse(BaseModel):
+    _id: int
+    first_name: str
+    second_name: str
+    stack: list
+    roles: list
+    about: str
+    exp_work: str
+    hackathons: list[dict]
+    GitHub: str
+    link_tg: str
+    exp: int
+    who_is: bool

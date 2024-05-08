@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Body, Path, HTTPException, Query, status
 from typing import Annotated
 from managers.user import User
-from schemas.user import UserCreate, UserUpdate
+from schemas.user import UserCreate, UserUpdate, UserResponse
 from functools import wraps
 from fastapi import Request
-from api.cache_storage import cache
+from api.cache_storage_v2 import cache
 
 user_router = APIRouter(prefix='/api/users')
 
@@ -22,8 +22,8 @@ async def get_user(chat_id: Annotated[int, Path()]):
 
 
 @user_router.post('', status_code=201)
-@cache
-async def create_user(request: Request, schema: Annotated[UserCreate, Body()]):
+@cache(invalidate="get_all_users")
+async def create_user(schema: Annotated[UserCreate, Body()]):
     parameters = schema.dict()
     try:
         user = User(parameters=parameters)
@@ -34,9 +34,9 @@ async def create_user(request: Request, schema: Annotated[UserCreate, Body()]):
         return 'OK'
 
 
-@user_router.get('', status_code=200)
-@cache
-async def get_all_users(request: Request, who_is: Annotated[bool, Query()] = None):
+@user_router.get('', status_code=200, response_model=list[UserResponse])
+@cache(expire=30)
+async def get_all_users(who_is: Annotated[bool, Query()] = None):
     users = await User.all(who_is=who_is)
     return users
 

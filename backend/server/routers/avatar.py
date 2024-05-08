@@ -6,6 +6,7 @@ from fastapi import File, UploadFile
 from fastapi.responses import FileResponse
 from buckets.avatar import Avatar
 from managers.user import User
+from api.worker import load_to_storage
 
 avatar_router = APIRouter(prefix='/api/files/avatars')
 
@@ -26,9 +27,10 @@ async def update_avatar(chat_id: Annotated[int, Path()], file: UploadFile):
     if not user:
         raise HTTPException(status_code=404, detail='User with chat_id not found')
     avatar = Avatar(chat_id, file)
-    response = await avatar.load_to_storage()
-    if response['ResponseMetadata']['HTTPStatusCode'] != 200:
-        raise HTTPException(status_code=500, detail='Storage error')
+    file_content = await avatar.file.read()
+    load_to_storage.delay(file_content=file_content, filename=avatar.filename, bucket_name=avatar.bucket_name)
+    # if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+    #     raise HTTPException(status_code=500, detail='Storage error')
     return "Successfully update avatar"
 
 @avatar_router.delete("/{chat_id}")

@@ -1,6 +1,5 @@
 from api.storage import session
 
-
 class Avatar:
     bucket_name = 'avatars2'
     storage_session = session
@@ -22,11 +21,11 @@ class Avatar:
     #     # response = self.storage_session.upload_file(f'{self.filepath}', self.bucket_name, self.filename)
     #     response = self.load_to_storage2()
     #     return response
-
-    async def load_to_storage(self):
-        file_content = await self.file.read()
-        response = self.storage_session.put_object(Bucket=self.bucket_name, Key=self.filename, Body=file_content)
-        return response
+    # @celery.task
+    # async def load_to_storage(self):
+    #     file_content = await self.file.read()
+    #     response = self.storage_session.put_object(Bucket=self.bucket_name, Key=self.filename, Body=file_content)
+    #     return response
 
     @classmethod
     def get(cls, chat_id):
