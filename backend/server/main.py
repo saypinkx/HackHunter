@@ -3,6 +3,7 @@ import uvicorn
 from starlette.middleware.cors import CORSMiddleware
 from routers.user import user_router
 from routers.avatar import avatar_router
+from routers.team import router as team_router
 from fastapi import FastAPI, Request, Response
 import time
 from fastapi import Depends, FastAPI, Header, HTTPException
@@ -17,6 +18,7 @@ from config import REDIS_NAME, REDIS_PORT, REDIS_HOST
 app = FastAPI()
 app.include_router(user_router)
 app.include_router(avatar_router)
+app.include_router(team_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

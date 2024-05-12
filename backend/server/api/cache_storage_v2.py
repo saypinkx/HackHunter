@@ -10,7 +10,7 @@ from json import encoder
 
 
 class CashStorageSealizer:
-    def searize(self, value):
+    def serializate(self, value):
         if type(value) in [str, int, float]:
             return value
         if type(value) in [list, tuple, set]:
@@ -21,7 +21,7 @@ class CashStorageSealizer:
                 result.append(elem)
             return json.dumps(result)
 
-    def desearize(self, value):
+    def deserializate(self, value):
         return json.loads(value)
 
 
@@ -36,7 +36,7 @@ class CacheStorage:
         return keys
 
     def add_cache(self, key, value, expire=False):
-        value = self.sealizer.searize(value)
+        value = self.sealizer.serializate(value)
         if expire:
             self.session.setex(name=key, time=expire, value=value)
         else:
@@ -50,7 +50,7 @@ class CacheStorage:
 
     def get_value(self, key):
         value = self.session.get(name=key)
-        return self.sealizer.desearize(value)
+        return self.sealizer.deserializate(value)
 
     @classmethod
     def key_builder(cls, func, *args, **kwargs):
