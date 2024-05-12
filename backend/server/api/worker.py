@@ -2,8 +2,8 @@ from celery import Celery
 from buckets.avatar import session
 from config import REDIS_NAME, REDIS_PORT, REDIS_HOST
 
-celery = Celery('tasks', broker=F'redis://62.113.104.103:6379',
-                backend=F'redis://62.113.104.103:6379')
+celery = Celery('tasks', broker=F'redis://62.113.104.103:6379/1',
+                backend=F'redis://62.113.104.103:6379/1')
 
 
 @celery.task
