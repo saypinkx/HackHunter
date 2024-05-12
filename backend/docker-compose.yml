@@ -43,6 +43,8 @@ services:
     command: celery -A api.worker:celery worker --loglevel=INFO
     ports:
       - 6162:6162
+    env_file:
+      - server/.env-prod
     environment:
       - CELERY_BROKER=redis://62.113.104.103:6379/1
       - CELERY_RESULT_BACKEND=redis://62.113.104.103:6379/1
