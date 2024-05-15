@@ -49,3 +49,18 @@ class User:
 
     async def delete(self):
         await self.users.delete_one({'_id': self._id})
+
+    async def response(self):
+        id = self._id
+        user_response = self.__dict__.copy()
+        del user_response['_id']
+        user_response['chat_id'] = id
+        return user_response
+    @classmethod
+    async def all_response(cls, users: list):
+        users_response = []
+        for user in users:
+            user_response = await user.response()
+            users_response.append(user_response)
+        return users_response
+

@@ -16,7 +16,7 @@ class CashStorageSealizer:
         if type(value) in [list, tuple, set]:
             result = []
             for elem in value:
-                if type(elem) not in [str, int, float]:
+                if type(elem) not in [str, int, float, dict]:
                     elem = elem.__dict__
                 result.append(elem)
             return json.dumps(result)

@@ -2,9 +2,9 @@ from pydantic import BaseModel
 
 
 class TeamCreate(BaseModel):
+    id: str
     name: str
     description: str
-    link_tag: str
     exp: int
     users_chat_id: list[int]
     capitan_chat_id: int
@@ -15,7 +15,6 @@ class TeamCreate(BaseModel):
 class TeamUpdate(BaseModel):
     name: str
     description: str
-    link_tag: str
     exp: int
     users_chat_id: list[int]
     capitan_chat_id: int

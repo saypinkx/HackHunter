@@ -15,12 +15,12 @@ user_router = APIRouter(prefix='/api/users')
 
 
 
-@user_router.get('/{chat_id}', status_code=200)
+@user_router.get('/{chat_id}', status_code=200, response_model=UserResponse)
 async def get_user(chat_id: Annotated[int, Path()]):
     user = await User.get(chat_id)
     if not user:
         raise HTTPException(status_code=404, detail='User with chat_id not found')
-    return user
+    return await user.response()
 
 
 @user_router.post('', status_code=201)
@@ -40,7 +40,7 @@ async def create_user(schema: Annotated[UserCreate, Body()]):
 @cache(expire=30)
 async def get_all_users(who_is: Annotated[bool, Query()] = None):
     users = await User.all(who_is=who_is)
-    return users
+    return await User.all_response(users)
 
 
 @user_router.put('/{chat_id}', status_code=200)

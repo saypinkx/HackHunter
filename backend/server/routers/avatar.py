@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Body, Path, HTTPException, Query, status, Response
 from typing import Annotated
+
 from managers.user import User
 from schemas.user import UserCreate, UserUpdate
 from fastapi import File, UploadFile

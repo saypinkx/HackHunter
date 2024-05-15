@@ -30,7 +30,7 @@ class UserUpdate(BaseModel):
     who_is: bool
 
 class UserResponse(BaseModel):
-    _id: int
+    chat_id: int
     first_name: str
     second_name: str
     stack: list
