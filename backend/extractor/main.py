@@ -130,7 +130,7 @@ def extract(HOST, PORT, driver):
                     except:
                         print(f'Can not update hackathon - {link}')
 options = webdriver.ChromeOptions()
-# options.add_argument('--no-sandbox')
+options.add_argument('--no-sandbox')
 # options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 extract(HOST, PORT, driver=driver)
