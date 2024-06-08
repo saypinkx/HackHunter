@@ -1,5 +1,4 @@
-FROM selenium/standalone-chrome:dev
-
+from python:3.10
 #USER root
 #RUN apt-get update && apt-get install python3-distutils -y
 #RUN wget https://bootstrap.pypa.io/get-pip.py
