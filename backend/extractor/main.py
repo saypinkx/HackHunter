@@ -130,7 +130,16 @@ def extract(HOST, PORT, driver):
                     except:
                         print(f'Can not update hackathon - {link}')
 options = webdriver.ChromeOptions()
-options.add_argument('--no-sandbox')
-# options.add_argument('--headless')
-driver = webdriver.Chrome(options=options)
+# options.add_argument('--no-sandbox')
+# # options.add_argument('--headless')
+remote_address = f"{HOST}:4444"
+
+# Возможности браузера
+desired_capabilities = {
+    "browserName": "chrome",
+    "javascriptEnabled": True
+}
+
+# Подключение к удаленному веб-драйверу
+driver = webdriver.Remote(remote_address, desired_capabilities)
 extract(HOST, PORT, driver=driver)

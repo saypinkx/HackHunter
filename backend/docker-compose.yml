@@ -73,6 +73,16 @@ services:
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
       - CELERY_BROKER_CONNECTION_RETRY=True
+  selenium-hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
 #  extractor:
 #    image: selenium/node-chrome:dev
 #    shm_size: 2gb
@@ -81,18 +91,19 @@ services:
 #    environment:
 #      - SE_EVENT_BUS_HOST=selenium-hub
 #      - SE_EVENT_BUS_PUBLISH_PORT=4442
-#      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-  extractor:
-    build:
-      context: extractor
-      dockerfile: Dockerfile
-    env_file:
-      - extractor/.env-prod
-    container_name: extractor
-    depends_on:
-      - mongodb
-      - redis
-      - server
+##      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+#  extractor:
+#    build:
+#      context: extractor
+#      dockerfile: Dockerfile
+#    env_file:
+#      - extractor/.env-prod
+#    container_name: extractor
+#    depends_on:
+#      - mongodb
+#      - redis
+#      - server
+
 
 
 volumes:
