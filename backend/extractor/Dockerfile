@@ -1,4 +1,4 @@
-FROM joyzoursky/python-chromedriver:3.8
+FROM selenium/node-chrome:dev
 
 RUN mkdir /extractor
 WORKDIR /extractor
