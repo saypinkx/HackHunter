@@ -12,7 +12,8 @@ webdriver.Remote()
 def get_links(url):
     url = url
     links = []
-    driver = webdriver.Remote()
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(options=options)
     # options = webdriver.ChromeOptions()
 
     # options.add_argument('--no-sandbox')
