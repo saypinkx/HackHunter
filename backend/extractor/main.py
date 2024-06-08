@@ -7,16 +7,17 @@ from config import HOST, PORT
 # from pyvirtualdisplay import Display
 # display = Display(visible=False, size=(800, 800))
 # display.start()
-
+webdriver.Remote()
 
 def get_links(url):
     url = url
     links = []
-    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote()
+    # options = webdriver.ChromeOptions()
 
-    options.add_argument('--no-sandbox')
-    options.add_argument('--headless')
-    driver = webdriver.Chrome(options=options)
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--headless')
+    # driver = webdriver.Chrome(options=options)
     driver.get(url)
     driver.implicitly_wait(2)
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
