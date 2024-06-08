@@ -15,7 +15,7 @@ services:
     ports:
       - 6379:6379
     command: redis-server /usr/local/etc/redis/redis.conf
-#    command: redis-server /usr/local/etc/redis/redis.conf
+  #    command: redis-server /usr/local/etc/redis/redis.conf
   server:
     build:
       context: server
@@ -73,25 +73,42 @@ services:
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
       - CELERY_BROKER_CONNECTION_RETRY=True
-  selenium-hub:
-    image: selenium/hub
+  #  selenium-hub:
+  #    image: selenium/hub
+  #    ports:
+  #      - "4444:4444"
+  #  chrome:
+  #    image: selenium/node-chrome
+  #    volumes:
+  #      - /dev/shm:/dev/shm
+  #    depends_on:
+  #      - selenium-hub
+
+  #  extractor:
+  #    image: selenium/node-chrome:dev
+  #    shm_size: 2gb
+  #    depends_on:
+  #      - selenium-hub
+  #    environment:
+  #      - SE_EVENT_BUS_HOST=selenium-hub
+  #      - SE_EVENT_BUS_PUBLISH_PORT=4442
+  ##      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  HubService:
+    image: selenium/hub:4.0.0-rc-2-20210930
+    container_name: seleniumHub
     ports:
       - "4444:4444"
-  chrome:
-    image: selenium/node-chrome
-    volumes:
-      - /dev/shm:/dev/shm
+
+  ChromeService:
+    image: selenium/node-chrome:4.0.0-rc-2-20210930
+    shm_size: "2gb"
+    environment:
+      - SE_EVENT_BUS_HOST=seleniumHub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=3
     depends_on:
-      - selenium-hub
-#  extractor:
-#    image: selenium/node-chrome:dev
-#    shm_size: 2gb
-#    depends_on:
-#      - selenium-hub
-#    environment:
-#      - SE_EVENT_BUS_HOST=selenium-hub
-#      - SE_EVENT_BUS_PUBLISH_PORT=4442
-##      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - HubService
   extractor:
     build:
       context: extractor
@@ -103,6 +120,8 @@ services:
       - mongodb
       - redis
       - server
+      - chrome
+      - selenium-hub
 
 
 
