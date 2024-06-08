@@ -7,7 +7,6 @@ from config import HOST, PORT
 # from pyvirtualdisplay import Display
 # display = Display(visible=False, size=(800, 800))
 # display.start()
-webdriver.Remote()
 
 def get_links(url):
     url = url
