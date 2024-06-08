@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 import requests
 from config import HOST, PORT
+from pyvirtualdisplay import Display
+display = Display(visible=False, size=(800, 800))
+display.start()
 
 
 def get_links(url):
