@@ -1,4 +1,4 @@
-FROM selenium/standalone-chrome
+FROM selenium/standalone-chrome:latest
 
 USER root
 RUN apt-get update && apt-get install python3-distutils -y
