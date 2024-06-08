@@ -9,4 +9,5 @@ RUN mkdir /extractor
 WORKDIR /extractor
 COPY  . .
 RUN pip install -r requirements.txt
+RUN chmod +x main.py
 CMD ["python","main.py"]
