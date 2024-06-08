@@ -5,6 +5,7 @@ from routers.user import user_router
 from routers.avatar import avatar_router
 from routers.team import router as team_router
 from routers.logo import logo_router
+from routers.hack import router as hack_router
 from fastapi import FastAPI, Request, Response
 import time
 from fastapi import Depends, FastAPI, Header, HTTPException
@@ -21,6 +22,7 @@ app.include_router(user_router)
 app.include_router(avatar_router)
 app.include_router(team_router)
 app.include_router(logo_router)
+app.include_router(hack_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,7 +42,7 @@ async def add_process_time_header(request: Request, call_next):
 
 
 if __name__ == "__main__":
-    uvicorn.run('main:app', host="127.0.0.1", port=8000)
+    uvicorn.run('main:app', host="127.0.0.1", port=2000)
 @app.on_event('startup')
 async def startup_event():
     redis = aioredis.from_url(F"{REDIS_NAME}://{REDIS_HOST}:{REDIS_PORT}", encoding='utf8', decode_responses=True)

@@ -73,6 +73,20 @@ services:
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
       - CELERY_BROKER_CONNECTION_RETRY=True
+      -
+  extractor:
+    build:
+      context: extractor
+      dockerfile: Dockerfile
+    env_file:
+      - extractor/.env-prod
+    container_name: extractor
+    depends_on:
+      - mongodb
+      - redis
+      - server
+
+
 volumes:
   db:
   redis.conf:
