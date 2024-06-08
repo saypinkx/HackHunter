@@ -8,11 +8,10 @@ from config import HOST, PORT
 # display = Display(visible=False, size=(800, 800))
 # display.start()
 
-def get_links(url):
+def get_links(url, driver):
     url = url
     links = []
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(options=options)
+    # options = webdriver.ChromeOptions()
     # options = webdriver.ChromeOptions()
 
     # options.add_argument('--no-sandbox')
@@ -42,15 +41,11 @@ def get_links(url):
             link = url + link
         old_links.append(link)
 
-    driver.close()
-    driver.quit()
     return new_links, old_links
 
 
-def get_info_about_hack(url):
-    options = webdriver.ChromeOptions()
+def get_info_about_hack(url, driver):
     # options.add_argument('--headless')
-    driver = webdriver.Chrome(options=options)
     driver.get(url)
     driver.implicitly_wait(2)
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
@@ -81,14 +76,12 @@ def get_info_about_hack(url):
         if 'Зарегистрироваться' in link.text:
             registration_link = link.find('a').get('href')
 
-    driver.close()
-    driver.quit()
     return text, name, tags, image_link, registration_link
 
 
-def extract(HOST, PORT):
+def extract(HOST, PORT, driver):
     while True:
-        new_links, old_links = get_links(url='https://www.хакатоны.рус')
+        new_links, old_links = get_links(url='https://www.хакатоны.рус', driver=driver)
         # server_hackathons = requests.get(f'http://{my_ip}:2000/hackathons')
 
         response = requests.get(f'http://{HOST}:{PORT}/api/hackathons')
@@ -101,7 +94,7 @@ def extract(HOST, PORT):
         for link in new_links:
             if link not in hackathons_db:
                 try:
-                    text, name, tags, image_link, registration_link = get_info_about_hack(link)
+                    text, name, tags, image_link, registration_link = get_info_about_hack(link, driver=driver)
                     data = {'id': link, 'text': str(text), 'tags': list(tags), 'image_link': image_link,
                             'name': name, 'registration_link': registration_link, 'end': False}
                     response = requests.post(f'http://{HOST}:{PORT}/api/hackathons', json=data,
@@ -114,7 +107,7 @@ def extract(HOST, PORT):
         for link in old_links:
             if link not in hackathons_db:
                 try:
-                    text, name, tags, image_link, registration_link = get_info_about_hack(link)
+                    text, name, tags, image_link, registration_link = get_info_about_hack(link, driver=driver)
                     data = {'id': link, 'text': str(text), 'tags': list(tags), 'image_link': image_link,
                             'name': name, 'registration_link': registration_link, 'end': True}
                     response = requests.post(f'http://{HOST}:{PORT}/api/hackathons', json=data,
@@ -127,7 +120,7 @@ def extract(HOST, PORT):
             else:
                 if hackathons_db[link] == False:
                     try:
-                        text, name, tags, image_link, registration_link = get_info_about_hack(link)
+                        text, name, tags, image_link, registration_link = get_info_about_hack(link, driver=driver)
                         data = {'text': str(text), 'tags': list(tags), 'image_link': image_link,
                                 'name': name, 'registration_link': registration_link, 'end': True}
                         response = requests.put(f'http://{HOST}:{PORT}/api/hackathons/{link}', json=data,
@@ -136,6 +129,8 @@ def extract(HOST, PORT):
                             print(f'Update hackathon - {link}')
                     except:
                         print(f'Can not update hackathon - {link}')
-
-
-extract(HOST, PORT)
+options = webdriver.ChromeOptions()
+# options.add_argument('--no-sandbox')
+# options.add_argument('--headless')
+driver = webdriver.Chrome(options=options)
+extract(HOST, PORT, driver=driver)
