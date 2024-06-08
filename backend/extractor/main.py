@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 import requests
 from config import HOST, PORT
+
+
 # from pyvirtualdisplay import Display
 # display = Display(visible=False, size=(800, 800))
 # display.start()
@@ -129,6 +131,8 @@ def extract(HOST, PORT, driver):
                             print(f'Update hackathon - {link}')
                     except:
                         print(f'Can not update hackathon - {link}')
+
+
 options = webdriver.ChromeOptions()
 # options.add_argument('--no-sandbox')
 # # options.add_argument('--headless')
@@ -141,5 +145,5 @@ desired_capabilities = {
 }
 
 # Подключение к удаленному веб-драйверу
-driver = webdriver.Remote(remote_address, desired_capabilities)
+driver = webdriver.Remote(remote_address, options=options)
 extract(HOST, PORT, driver=driver)
