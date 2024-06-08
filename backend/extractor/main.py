@@ -143,7 +143,7 @@ desired_capabilities = {
     "browserName": "chrome",
     "javascriptEnabled": True
 }
-
+time.sleep(5)
 # Подключение к удаленному веб-драйверу
 driver = webdriver.Remote(remote_address, options=options)
 extract(HOST, PORT, driver=driver)

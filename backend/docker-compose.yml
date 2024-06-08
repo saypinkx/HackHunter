@@ -73,7 +73,7 @@ services:
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
       - CELERY_BROKER_CONNECTION_RETRY=True
-  #  selenium-hub:
+  #  hub:
   #    image: selenium/hub
   #    ports:
   #      - "4444:4444"
