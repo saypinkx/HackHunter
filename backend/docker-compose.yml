@@ -73,7 +73,6 @@ services:
       - DEBUG=1
       - CELERY_BROKER_TRANSPORT=amqp
       - CELERY_BROKER_CONNECTION_RETRY=True
-      -
   extractor:
     build:
       context: extractor
