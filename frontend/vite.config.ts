@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import checker from 'vite-plugin-checker';
 // https://vitejs.dev/config/
 export default defineConfig({
+  appType: 'spa',
   plugins: [
     react(),
     TanStackRouterVite(),
