@@ -35,5 +35,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react'],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'no-console': 'error',
   },
+  ignorePatterns: ['*.config.ts', '*.config.cjs', 'node-modules', 'dist', 'public'],
 };
