@@ -19,7 +19,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "typeRoots": ["./node_modules/@types", "./node_modules/telegram-webapps"]
+    "typeRoots": ["./node_modules/@types", "./node_modules/telegram-webapps"],
+    "paths": {
+      "@pages": ["./src/pages"],
+      "@widgets": ["./src/widgets"],
+      "@ui": ["./src/shared/ui"],
+      "@lib": ["./src/shared/lib"],
+      "@icons": ["./src/shared/ui/icons"],
+      "@style/*": ["./src/shared/ui/styled-system/*"]
+    }
   },
   "include": ["./src"],
   "references": [{ "path": "./tsconfig.node.json" }]

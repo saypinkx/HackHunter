@@ -36,6 +36,8 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'no-console': 'error',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
   },
-  ignorePatterns: ['*.config.ts', '*.config.cjs', 'node-modules', 'dist', 'public'],
+  ignorePatterns: ['*.config.ts', '*.config.cjs', 'node-modules', 'dist', 'public', 'routeTree.get.ts'],
 };

@@ -1,1 +1,7 @@
 @layer reset, base, tokens, recipes, utilities;
+
+:root {
+  --text-primary-color: #222;
+  --text-secondary-color: #676767;
+  --text-tertiary-color: #bababa;
+}
