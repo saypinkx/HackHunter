@@ -1,4 +1,4 @@
-import { defineConfig, defineTextStyles } from '@pandacss/dev';
+import { defineConfig, defineKeyframes, defineTextStyles } from '@pandacss/dev';
 
 export default defineConfig({
   preflight: true,
@@ -6,6 +6,14 @@ export default defineConfig({
   outdir: './src/shared/ui/styled-system',
   importMap: '@style',
   theme: {
+    extend: {
+      keyframes: defineKeyframes({
+        skeleton: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+      }),
+    },
     textStyles: defineTextStyles({
       header1: {
         value: {
