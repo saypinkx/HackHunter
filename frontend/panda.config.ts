@@ -2,7 +2,7 @@ import { defineConfig, defineTextStyles } from '@pandacss/dev';
 
 export default defineConfig({
   preflight: true,
-  include: ['./src/**/*.{js,jsx,ts,tsx}'],
+  include: ['./src/**/*.{ts,tsx}'],
   outdir: './src/shared/ui/styled-system',
   importMap: '@style',
   theme: {
