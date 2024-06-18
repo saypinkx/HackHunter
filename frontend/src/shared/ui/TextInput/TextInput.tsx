@@ -40,6 +40,7 @@ const textInput = sva({
       flexGrow: 1,
     },
     input: {
+      height: '24px',
       outline: 'none',
       textStyle: 'body2',
       flexGrow: 1,
