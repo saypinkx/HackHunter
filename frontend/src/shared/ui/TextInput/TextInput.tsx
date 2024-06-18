@@ -3,13 +3,19 @@ import { cx, sva } from '@style/css';
 import { useState, ChangeEvent, ReactNode, useId, forwardRef } from 'react';
 
 type TextInputProps = Omit<JSX.IntrinsicElements['input'], 'onChange'> & {
-  view?: 'normal' | 'clear';
+  /** Показать кнопку очистки поля */
   hasClear?: boolean;
+  /** Описание поля */
   label?: string;
+  /** Сообщение (об ошибке) */
   message?: string;
+  /** Индикатор наличия ошибки */
   hasError?: boolean;
+  /** Обработчик изменения значения */
   onChange?: (value: string) => void;
+  /** Дополнительный элемент перед полем ввода */
   beforeContent?: ReactNode;
+  /** Дополнительный элемент после поля ввода */
   afterContent?: ReactNode;
 };
 

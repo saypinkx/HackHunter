@@ -6,7 +6,6 @@ const meta = {
   title: 'Components/TextInput',
   component: TextInput,
   parameters: {},
-  tags: ['autodocs'],
   args: { onChange: fn() },
 } satisfies Meta<typeof TextInput>;
 
