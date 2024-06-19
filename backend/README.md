@@ -53,14 +53,14 @@ cd HackHunter/backend
 echo ".env-prod" >> .gitignore
 ```
 ## Важное уточнение №2
-Занятые порты:
-mongo - 27017
-redis - 6379
-server - 8000
-worker - 6162
-flower - 5555
-selenium_hub - 4444
-chrome - 4442, 4443
+Занятые порты: \
+mongo - 27017 \
+redis - 6379 \
+server - 8000\
+worker - 6162\
+flower - 5555\
+selenium_hub - 4444\
+chrome - 4442, 4443 
 
 
 
