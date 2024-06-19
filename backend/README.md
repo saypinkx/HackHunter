@@ -44,7 +44,7 @@ docker-compose up -d
 
 Все готово! :)
 
-## Важное уточнение!
+## Важное уточнение №1
 Eсли собираетесь разворачивать на localhost и в дальнейшем пушить что-то в репозиторий, то следует добавить env-файлы в gitignore, чтобы токены бота и хранилиа не попали в публичный доступ
 ```
 cd HackHunter/backend
@@ -52,6 +52,16 @@ cd HackHunter/backend
 ```
 echo ".env-prod" >> .gitignore
 ```
+## Важное уточнение №2
+Занятые порты:
+mongo - 27017
+redis - 6379
+server - 8000
+worker - 6162
+flower - 5555
+selenium_hub - 4444
+chrome - 4442, 4443
+
 
 
 
