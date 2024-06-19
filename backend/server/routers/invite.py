@@ -9,13 +9,13 @@ from api.cache_storage_v2 import cache
 router = APIRouter(prefix='/api/invites')
 
 
-@router.get('/{to_id}', status_code=200, response_model=list[SchemaResponse])
+@router.get('received/{to_id}', status_code=200, response_model=list[SchemaResponse])
 async def get_received_invites(to_id: Annotated[int, Path()]):
     nodes = await Manager.get_all(to_id=to_id)
     return await Manager.all_response(nodes)
 
 
-@router.get('/{from_id}', status_code=200, response_model=list[SchemaResponse])
+@router.get('sent/{from_id}', status_code=200, response_model=list[SchemaResponse])
 async def get_sent_invites(from_id: Annotated[int, Path()]):
     nodes = await Manager.get_all(from_id=from_id)
     return await Manager.all_response(nodes)
