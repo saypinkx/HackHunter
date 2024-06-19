@@ -36,11 +36,22 @@ echo "aws_access_key_id={your_aws_access_key_id}" >> server/.env-prod
 ```
 echo "aws_secret_access_key={your_aws_secret_access_key}" >> server/.env-prod
 ```
-Собираем образ:
+## Собираем образ:
 
 ```
 docker-compose up -d
 ```
+
 Все готово! :)
+
+## Важное уточнение!
+Eсли собираетесь разворачивать на localhost и в дальнейшем пушить что-то в репозиторий, то следует добавить env-файлы в gitignore, чтобы токены бота и хранилиа не попали в публичный доступ
+```
+cd HackHunter/backend
+```
+```
+echo ".env-prod" >> .gitignore
+```
+
 
 
