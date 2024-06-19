@@ -32,7 +32,7 @@ class Team:
         parameters = team.__dict__
         parameters['users_chat_id'].append(user_chat_id)
         await team.update(parameters)
-
+        
 
     @classmethod
     async def all(cls, **parameters):
