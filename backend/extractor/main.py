@@ -89,6 +89,7 @@ def extract(HOST, PORT, driver):
         response = requests.get(f'http://{HOST}:{PORT}/api/hackathons')
 
         hackathons = response.json()
+        print(hackathons)
         hackathons_db = dict()
         for hack in hackathons:
             hackathons_db[hack['id']] = hack['end']
