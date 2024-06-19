@@ -27,6 +27,14 @@ class Team:
         return cls(parameters=team_dict)
 
     @classmethod
+    async def add_user_in_team(cls, team_id, user_chat_id: int):
+        team = await cls.get(team_id)
+        parameters = team.__dict__
+        parameters['users_chat_id'].append(user_chat_id)
+        await team.update(parameters)
+
+
+    @classmethod
     async def all(cls, **parameters):
         query = dict()
         for key in parameters:

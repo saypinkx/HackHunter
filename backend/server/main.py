@@ -16,9 +16,10 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache.decorator import cache
 from config import REDIS_NAME, REDIS_PORT, REDIS_HOST
-
+from routers.invite import router as invite_router
 app = FastAPI()
 app.include_router(user_router)
+app.include_router(invite_router)
 app.include_router(avatar_router)
 app.include_router(team_router)
 app.include_router(logo_router)
