@@ -24,7 +24,7 @@ async def get_sent_invites(from_id: Annotated[int, Path()]):
 @router.post('', status_code=201)
 async def create_invite(schema: Annotated[SchemaCreate, Body()]):
     parameters = schema.dict()
-    to_user, from_user, team = User.get(schema.to_id), User.get(schema.from_id), Team.get(schema.team_id)
+    to_user, from_user, team = await User.get(schema.to_id), await User.get(schema.from_id), await Team.get(schema.team_id)
     if to_user is None or from_user is None:
         raise HTTPException(status_code=404,
                             detail=f'User with id={schema.to_id if to_user is None else schema.from_id} not found')
