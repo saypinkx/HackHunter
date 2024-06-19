@@ -13,13 +13,23 @@ git clone https://github.com/saypinkx/HackHunter
 ```
 cd HackHunter/backend
 ```
+## Прописываем адрес сервера
+YOUR_HOST - адрес вашего сервера (пример - 62.113.104.103)
+```
+echo "HOST={YOUR_HOST}" >> extractor/.env-prod
+```
+```
+echo "REDIS_HOST={YOUR_HOST}" >> server/.env-prod
+```
+
 ## Прописываем ключи:
 
-Токен для телеграмм бота (необязательный шаг, все backend работает без бота):
+
+Токен для телеграмм бота (необязательный шаг,  backend работает без бота):
 ```
 echo "TOKEN_BOT={YOUR_TOKEN}" >> client/.env-prod
 ```
-Ключи для хранилища S9:
+Ключи для хранилища S9 (отправлю в тг):
 ```
 echo "aws_access_key_id={your_aws_access_key_id}" >> server/.env-prod
 ```
