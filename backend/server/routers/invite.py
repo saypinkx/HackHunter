@@ -50,6 +50,6 @@ async def update_invite(schema: Annotated[SchemaUpdate, Body()]):
     if not node:
         raise HTTPException(status_code=404, detail='Invite with data not found')
     await node.update(parameters=parameters)
-    if schema.status is "accept":
+    if schema.status == "accept":
         await Team.add_user_in_team(team_id=schema.team_id, user_chat_id=schema.to_id)
     return 'OK'
