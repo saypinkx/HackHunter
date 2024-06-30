@@ -10,8 +10,8 @@ const badgeCls = css({
   borderRadius: '8px',
   padding: '2px 8px',
   width: 'min-content',
-  backgroundColor: 'silver',
   textStyle: 'body2',
+  whiteSpace: 'nowrap',
 });
 
 export const Badge = ({ className, children }: BadgeProps) => {
