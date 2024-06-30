@@ -19,42 +19,42 @@ export default defineConfig({
             blue: {
               dark: { value: '#c2d8ff' },
               light: { value: '#d9e6ff' },
-              default: { value: '#f4f8ff' },
+              DEFAULT: { value: '#f4f8ff' },
             },
             gray: {
               dark: { value: '#' },
               light: { value: '#e1e4ea' },
-              default: { value: '#ded9e1' },
+              DEFAULT: { value: '#ded9e1' },
             },
             lilac: {
               middle: { value: '#dbddfc' },
               dark: { value: '#979ae5' },
               light: { value: '#ebecff' },
-              default: { value: '#d2d4ff' },
+              DEFAULT: { value: '#d2d4ff' },
             },
             coral: {
-              default: { value: '#ffc5c5' },
+              DEFAULT: { value: '#ffc5c5' },
             },
             mint: {
-              default: { value: '#d6fed7' },
+              DEFAULT: { value: '#d6fed7' },
             },
             olive: {
-              default: { value: '#e1fac9' },
+              DEFAULT: { value: '#e1fac9' },
             },
             yellow: {
-              default: { value: '#fcf9c5' },
+              DEFAULT: { value: '#fcf9c5' },
             },
             orange: {
-              default: { value: '#f6d7b3' },
+              DEFAULT: { value: '#f6d7b3' },
             },
             purple: {
-              default: { value: '#edd8f7' },
+              DEFAULT: { value: '#edd8f7' },
             },
             emerald: {
-              default: { value: '#c8efdd' },
+              DEFAULT: { value: '#c8efdd' },
             },
             peach: {
-              default: { value: '#fff1c8' },
+              DEFAULT: { value: '#fff1c8' },
             },
           },
         },
