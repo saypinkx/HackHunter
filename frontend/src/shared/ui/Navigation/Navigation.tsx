@@ -1,6 +1,10 @@
-import { Handshake, Heart, Magnifier, Person } from '@icons';
 import { css } from '@style/css';
 import { Link } from '@tanstack/react-router';
+import type { ReactNode } from 'react';
+
+export interface NavigationProps {
+  links: { href: string; content: ReactNode }[];
+}
 
 const containerCls = css({
   display: 'grid',
@@ -24,21 +28,14 @@ const activeItemCls = css({
   color: 'var(--text-primary-color)',
 });
 
-export const Navigation = () => {
+export const Navigation = ({ links }: NavigationProps) => {
   return (
     <div className={containerCls}>
-      <Link to="/search/teams" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Magnifier /> Найти
-      </Link>
-      <Link to="/teams" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Heart /> Мои команды
-      </Link>
-      <Link to="/search" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Handshake /> Мои отклики
-      </Link>
-      <Link to="/search" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Person /> Профиль
-      </Link>
+      {links.map(({ href, content }) => (
+        <Link key={href} to={href} className={itemCls} activeProps={{ className: activeItemCls }}>
+          {content}
+        </Link>
+      ))}
     </div>
   );
 };

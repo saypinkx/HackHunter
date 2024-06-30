@@ -1,6 +1,7 @@
 import { css } from '@style/css';
 import { Outlet, createFileRoute, useNavigate, useLocation } from '@tanstack/react-router';
-import { Navigation, Page, PageTitle, TabsPanel } from '@ui';
+import { Page, PageTitle, TabsPanel } from '@ui';
+import { NavMenu } from '@widgets';
 
 export const Route = createFileRoute('/search')({
   component: () => <SearchPage />,
@@ -11,7 +12,7 @@ function SearchPage() {
   const tabId = useLocation({ select: ({ pathname }) => pathname.split('/').at(-1) });
 
   return (
-    <Page header={<PageTitle text="Найти" />} footer={<Navigation />}>
+    <Page header={<PageTitle text="Найти" />} footer={<NavMenu />}>
       <div className={css({ paddingInline: '16px' })}>
         <TabsPanel>
           <TabsPanel.Tabs activeTab={tabId}>
