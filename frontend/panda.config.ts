@@ -13,6 +13,77 @@ export default defineConfig({
           '100%': { transform: 'translateX(100%)' },
         },
       }),
+      tokens: {
+        colors: {
+          pastel: {
+            blue: {
+              dark: { value: '#c2d8ff' },
+              light: { value: '#d9e6ff' },
+              default: { value: '#f4f8ff' },
+            },
+            gray: {
+              dark: { value: '#' },
+              light: { value: '#e1e4ea' },
+              default: { value: '#ded9e1' },
+            },
+            lilac: {
+              middle: { value: '#dbddfc' },
+              dark: { value: '#979ae5' },
+              light: { value: '#ebecff' },
+              default: { value: '#d2d4ff' },
+            },
+            coral: {
+              default: { value: '#ffc5c5' },
+            },
+            mint: {
+              default: { value: '#d6fed7' },
+            },
+            olive: {
+              default: { value: '#e1fac9' },
+            },
+            yellow: {
+              default: { value: '#fcf9c5' },
+            },
+            orange: {
+              default: { value: '#f6d7b3' },
+            },
+            purple: {
+              default: { value: '#edd8f7' },
+            },
+            emerald: {
+              default: { value: '#c8efdd' },
+            },
+            peach: {
+              default: { value: '#fff1c8' },
+            },
+          },
+        },
+      },
+      semanticTokens: {
+        colors: {
+          text: {
+            primary: { value: '#222' },
+            secondary: { value: '#676767' },
+            tertiary: { value: '#bababa' },
+            disable: { value: '#d1d1d1' },
+            error: { value: '#ca4f44' },
+            contrast: { value: '#fff' },
+            link: { value: '#275adf' },
+          },
+          button: {
+            secondary: { value: '#f2f2f2' },
+            selected: { value: '#222' },
+            disabledSkeleton: { value: '#eff0f2' },
+          },
+          bg: {
+            primary: { value: '#fff' },
+            secondary: { value: '#f4f5f7' },
+            tertiary: { value: '#f0f0f2' },
+            skeleton: { value: '#e7e8e990' },
+            popup: { value: '#0e0e0f' },
+          },
+        },
+      },
     },
     textStyles: defineTextStyles({
       header1: {

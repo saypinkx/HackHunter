@@ -11,7 +11,7 @@ interface TabsItemProps {
 
 const tabCls = css({
   display: 'flex',
-  color: 'var(--text-tertiary-color)',
+  color: 'text.tertiary',
   alignItems: 'center',
   justifyContent: 'center',
   textStyle: 'header2',
@@ -19,7 +19,7 @@ const tabCls = css({
 });
 
 const activeTabCls = css({
-  color: 'var(--text-primary-color)',
+  color: 'text.primary',
 });
 
 export const Tab = ({ id, title, active, onClick }: TabsItemProps) => {

@@ -19,13 +19,13 @@ const itemCls = css({
   alignItems: 'center',
   gap: '8px',
   textAlign: 'center',
-  color: 'var(--text-tertiary-color)',
+  color: 'text.tertiary',
   cursor: 'pointer',
   textStyle: 'buttonMini',
 });
 
 const activeItemCls = css({
-  color: 'var(--text-primary-color)',
+  color: 'text.primary',
 });
 
 export const Navigation = ({ links }: NavigationProps) => {
