@@ -5,3 +5,4 @@ export * from './Spinner';
 export * from './Navigation';
 export * from './Tabs';
 export * from './Badge';
+export * from './Level';
