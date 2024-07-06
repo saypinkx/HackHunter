@@ -1,5 +1,5 @@
-import { css } from '@style/css';
-import { Link } from '@tanstack/react-router';
+import { css, cva } from '@style/css';
+import { Link, useLocation } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
 
 export interface NavigationProps {
@@ -13,26 +13,31 @@ const containerCls = css({
   paddingBlock: '12px',
 });
 
-const itemCls = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '8px',
-  textAlign: 'center',
-  color: 'text.tertiary',
-  cursor: 'pointer',
-  textStyle: 'buttonMini',
-});
-
-const activeItemCls = css({
-  color: 'text.primary',
+const linksCls = cva({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '8px',
+    textAlign: 'center',
+    cursor: 'pointer',
+    textStyle: 'buttonMini',
+  },
+  variants: {
+    type: {
+      base: { color: 'text.tertiary' },
+      active: { color: 'text.primary' },
+    },
+  },
 });
 
 export const Navigation = ({ links }: NavigationProps) => {
+  const pathname = useLocation({ select: (state) => state.pathname });
+
   return (
     <div className={containerCls}>
       {links.map(({ href, content }) => (
-        <Link key={href} to={href} className={itemCls} activeProps={{ className: activeItemCls }}>
+        <Link key={href} to={href} className={linksCls({ type: pathname.startsWith(href) ? 'active' : 'base' })}>
           {content}
         </Link>
       ))}
