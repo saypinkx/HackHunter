@@ -17,7 +17,6 @@ const textCls = css({
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: '14px',
-  letterSpacing: '-1px',
   fontFamily: '"JetBrains mono", mono',
 });
 

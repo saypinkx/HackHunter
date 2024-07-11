@@ -6,6 +6,7 @@ import circleCross from './circleCross.svg?react';
 import calendar from './calendar.svg?react';
 import placeMark from './placeMark.svg?react';
 import searchPerson from './searchPerson.svg?react';
+import filter from './filter.svg?react';
 
 export const Magnifier = magnifier;
 export const Heart = heart;
@@ -15,3 +16,4 @@ export const CircleCross = circleCross;
 export const Calendar = calendar;
 export const PlaceMark = placeMark;
 export const SearchPerson = searchPerson;
+export const Filter = filter;

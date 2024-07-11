@@ -1,6 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { TeamCard, type TeamCardProps } from '../widgets/TeamCard';
+import { SearchBar } from '@widgets';
 import { css } from '@style/css';
+import { Chip, Filter } from '@ui';
+import { useState } from 'react';
 
 const mockTeams: TeamCardProps[] = [
   {
@@ -33,9 +36,36 @@ const teamPageCls = css({
   gap: '8px',
 });
 
+const filterCls = css({
+  display: 'flex',
+  gap: '8px',
+});
+
+const chipCls = css({
+  backgroundColor: 'button.secondary',
+});
+
 function SearchTeamPage() {
+  const [value, setValue] = useState('');
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const onReset = () => {
+    setValue('');
+  };
+
   return (
     <div className={teamPageCls}>
+      <SearchBar placeholder="Название, роль или хакатон" value={value} onChange={onChange} onReset={onReset} />
+
+      <div className={filterCls}>
+        <Chip className={chipCls}>
+          <Filter />
+        </Chip>
+        <Chip className={chipCls}>подходят мне</Chip>
+      </div>
       {mockTeams.map((team) => (
         <TeamCard key={team.teamName} {...team} />
       ))}
