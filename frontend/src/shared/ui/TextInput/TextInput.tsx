@@ -81,21 +81,23 @@ const textInput = sva({
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ hasClear, label, message, beforeContent, afterContent, ...props }, ref) => {
     const classes = textInput({ type: props.disabled ? 'disabled' : props.hasError ? 'error' : 'base' });
-    const [value, setValue] = useState(props.value ?? '');
+    const [internalValue, setInternalValue] = useState(props.defaultValue ?? '');
     const isControlledInput = props.value !== undefined;
     const internalId = useId();
     const id = props.id ?? internalId;
+    const value = isControlledInput ? props.value : internalValue;
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
       if (!isControlledInput) {
-        setValue(e.target.value);
+        setInternalValue(newValue);
       }
-      props.onChange?.(e.target.value);
+      props.onChange?.(newValue);
     };
 
     const onClearInput = () => {
       if (!isControlledInput) {
-        setValue('');
+        setInternalValue('');
       }
       props.onChange?.('');
     };
