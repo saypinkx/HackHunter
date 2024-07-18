@@ -23,6 +23,7 @@
     "paths": {
       "@pages/*": ["./src/pages/*"],
       "@features": ["./src/features"],
+      "@entities/*": ["./src/entities/*"],
       "@widgets": ["./src/widgets"],
       "@icons": ["./src/shared/ui/icons"],
       "@style/*": ["./src/shared/ui/styled-system/*"],
