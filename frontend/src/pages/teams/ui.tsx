@@ -1,8 +1,12 @@
 import { css } from '@style/css';
 import { Chip, Filter } from '@shared/ui';
-import { SearchBar, TeamCard } from '@widgets';
-import { useState } from 'react';
-import { mockTeams } from './api';
+import { TeamsList, loadTeams } from '@entities/team';
+import { $teams, loadTeamsFx } from '@entities/team';
+import { useUnit } from 'effector-react';
+import { useEffect } from 'react';
+import { SearchBar } from '../../widgets/SearchBar';
+import { useNavigate } from '@tanstack/react-router';
+import { $searchField, updateSearch } from '@entities/team/model/model';
 
 const teamPageCls = css({
   display: 'flex',
@@ -20,19 +24,20 @@ const chipCls = css({
 });
 
 export function SearchTeamPage() {
-  const [value, setValue] = useState('');
+  const navigate = useNavigate();
+  const search = useUnit($searchField);
+  const [teams, loading] = useUnit([$teams, loadTeamsFx.pending]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  const onReset = () => {
-    setValue('');
-  };
+  useEffect(loadTeams, []);
 
   return (
     <div className={teamPageCls}>
-      <SearchBar placeholder="Название, роль или хакатон" value={value} onChange={onChange} onReset={onReset} />
+      <SearchBar
+        placeholder="Название, роль или хакатон"
+        value={search}
+        onChange={(e) => updateSearch(e.target.value)}
+        onReset={() => updateSearch('')}
+      />
 
       <div className={filterCls}>
         <Chip className={chipCls}>
@@ -41,9 +46,11 @@ export function SearchTeamPage() {
         <Chip className={chipCls}>подходят мне</Chip>
       </div>
 
-      {mockTeams.map((team) => (
-        <TeamCard key={team.teamName} {...team} />
-      ))}
+      <TeamsList
+        teams={teams}
+        loading={loading}
+        onClickTeam={({ teamName }) => navigate({ to: `/teams/${teamName}` })}
+      />
     </div>
   );
 }

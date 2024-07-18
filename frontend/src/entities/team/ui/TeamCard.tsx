@@ -1,14 +1,10 @@
 import { css } from '@style/css';
 import { Badge, Calendar, Level, PlaceMark, SearchPerson } from '@shared/ui';
+import type { Team } from '../model/types';
 
 export interface TeamCardProps {
-  teamName: string;
-  teamLevel: number;
-  needRoles: string[];
-  hackName: string;
-  hackPlace: string;
-  hackStartDate: Date;
-  hackEndDate: Date;
+  team: Team;
+  onClick: (team: Team) => void;
 }
 
 const cardCls = css({
@@ -54,17 +50,11 @@ const badgeCls = css({
   backgroundColor: 'pastel.blue.light',
 });
 
-export const TeamCard = ({
-  teamName,
-  teamLevel,
-  hackName,
-  hackPlace,
-  needRoles,
-  hackStartDate,
-  hackEndDate,
-}: TeamCardProps) => {
+export const TeamCard = ({ team, onClick }: TeamCardProps) => {
+  const { teamName, teamLevel, needRoles, hackName, hackPlace, hackStartDate, hackEndDate } = team;
+
   return (
-    <div className={cardCls}>
+    <div className={cardCls} onClick={() => onClick(team)}>
       <div className={cardHeaderCls}>
         <h2 className={cardTitleCls}>{teamName}</h2>
         <Level level={teamLevel} />

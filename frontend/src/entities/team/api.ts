@@ -1,6 +1,6 @@
-import type { TeamCardProps } from '@widgets';
+import type { Team } from './model/types';
 
-export const mockTeams: TeamCardProps[] = [
+export const mockTeams: Team[] = [
   {
     teamName: 'Цифровые маги',
     teamLevel: 10,
@@ -20,3 +20,14 @@ export const mockTeams: TeamCardProps[] = [
     needRoles: ['front', 'back', 'analyst', 'ML', 'sys admin', 'scrum'],
   },
 ];
+
+export const getTeams = async () => {
+  await new Promise((res) => setTimeout(res, 1000));
+  return Promise.resolve(mockTeams);
+};
+
+export const getTeamsByName = async (name: string) => {
+  const allTeams = await getTeams();
+
+  return name ? allTeams.filter((team) => team.teamName.includes(name)) : allTeams;
+};
