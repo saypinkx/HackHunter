@@ -1,6 +1,7 @@
 export * from './icons';
 export * from './Page';
 export * from './PageTitle';
+export * from './Button';
 export * from './Spinner';
 export * from './Navigation';
 export * from './Tabs';
