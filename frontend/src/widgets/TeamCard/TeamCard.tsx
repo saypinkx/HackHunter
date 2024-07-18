@@ -1,5 +1,5 @@
 import { css } from '@style/css';
-import { Badge, Calendar, Level, PlaceMark, SearchPerson } from '@ui';
+import { Badge, Calendar, Level, PlaceMark, SearchPerson } from '@shared/ui';
 
 export interface TeamCardProps {
   teamName: string;

@@ -1,4 +1,4 @@
-import { Handshake, Heart, Magnifier, Navigation, Person, type NavigationProps } from '@ui';
+import { Handshake, Heart, Magnifier, Navigation, Person, type NavigationProps } from '@shared/ui';
 
 const links: NavigationProps['links'] = [
   {

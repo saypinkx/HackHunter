@@ -21,12 +21,12 @@
     "noFallthroughCasesInSwitch": true,
     "typeRoots": ["./node_modules/@types", "./node_modules/telegram-webapps"],
     "paths": {
-      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
+      "@features": ["./src/features"],
       "@widgets": ["./src/widgets"],
-      "@ui": ["./src/shared/ui"],
-      "@lib": ["./src/shared/lib"],
       "@icons": ["./src/shared/ui/icons"],
-      "@style/*": ["./src/shared/ui/styled-system/*"]
+      "@style/*": ["./src/shared/ui/styled-system/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": ["./src"],
