@@ -1,1 +1,11 @@
 @layer reset, base, tokens, recipes, utilities;
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono-vf.ttf') format('truetype-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-vf.ttf') format('truetype-variations');
+}
