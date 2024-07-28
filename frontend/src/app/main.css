@@ -1,10 +1,11 @@
 @layer reset, base, tokens, recipes, utilities;
 
-:root {
-  --text-primary-color: #222;
-  --text-secondary-color: #676767;
-  --text-tertiary-color: #bababa;
-  --text-disable-color: #d1d1d1;
-  --text-error-color: #ca4f44;
-  --background-skeleton-color: #e7e8e990;
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono-vf.ttf') format('truetype-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-vf.ttf') format('truetype-variations');
 }

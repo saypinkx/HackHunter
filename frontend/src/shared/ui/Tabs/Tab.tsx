@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TabsContext } from './context';
-import { css, cx } from '@style/css';
+import { cva } from '@style/css';
 
 interface TabsItemProps {
   id: string;
@@ -9,17 +9,20 @@ interface TabsItemProps {
   onClick?: (tabId: string) => void;
 }
 
-const tabCls = css({
-  display: 'flex',
-  color: 'var(--text-tertiary-color)',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textStyle: 'header2',
-  cursor: 'pointer',
-});
-
-const activeTabCls = css({
-  color: 'var(--text-primary-color)',
+const tabCls = cva({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textStyle: 'header2',
+    cursor: 'pointer',
+  },
+  variants: {
+    type: {
+      base: { color: 'text.tertiary' },
+      active: { color: 'text.primary' },
+    },
+  },
 });
 
 export const Tab = ({ id, title, active, onClick }: TabsItemProps) => {
@@ -28,7 +31,7 @@ export const Tab = ({ id, title, active, onClick }: TabsItemProps) => {
   const onTabClick = onClick ?? context.onClick;
 
   return (
-    <div className={cx(tabCls, isActive && activeTabCls)} onClick={() => onTabClick?.(id)}>
+    <div className={tabCls({ type: isActive ? 'active' : 'base' })} onClick={() => onTabClick?.(id)}>
       {title}
     </div>
   );

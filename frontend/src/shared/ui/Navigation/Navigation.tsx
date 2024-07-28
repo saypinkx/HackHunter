@@ -1,6 +1,10 @@
-import { Handshake, Heart, Magnifier, Person } from '@icons';
-import { css } from '@style/css';
-import { Link } from '@tanstack/react-router';
+import { css, cva } from '@style/css';
+import { Link, useLocation } from '@tanstack/react-router';
+import type { ReactNode } from 'react';
+
+export interface NavigationProps {
+  links: { href: string; content: ReactNode }[];
+}
 
 const containerCls = css({
   display: 'grid',
@@ -9,36 +13,34 @@ const containerCls = css({
   paddingBlock: '12px',
 });
 
-const itemCls = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '8px',
-  textAlign: 'center',
-  color: 'var(--text-tertiary-color)',
-  cursor: 'pointer',
-  textStyle: 'buttonMini',
+const linksCls = cva({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '8px',
+    textAlign: 'center',
+    cursor: 'pointer',
+    textStyle: 'buttonMini',
+  },
+  variants: {
+    type: {
+      base: { color: 'text.tertiary' },
+      active: { color: 'text.primary' },
+    },
+  },
 });
 
-const activeItemCls = css({
-  color: 'var(--text-primary-color)',
-});
+export const Navigation = ({ links }: NavigationProps) => {
+  const pathname = useLocation({ select: (state) => state.pathname });
 
-export const Navigation = () => {
   return (
     <div className={containerCls}>
-      <Link to="/search/teams" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Magnifier /> Найти
-      </Link>
-      <Link to="/teams" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Heart /> Мои команды
-      </Link>
-      <Link to="/search" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Handshake /> Мои отклики
-      </Link>
-      <Link to="/search" className={itemCls} activeProps={{ className: activeItemCls }}>
-        <Person /> Профиль
-      </Link>
+      {links.map(({ href, content }) => (
+        <Link key={href} to={href} className={linksCls({ type: pathname.startsWith(href) ? 'active' : 'base' })}>
+          {content}
+        </Link>
+      ))}
     </div>
   );
 };

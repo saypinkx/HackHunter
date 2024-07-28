@@ -29,17 +29,17 @@ const textInput = sva({
     },
     label: {
       textStyle: 'caption',
-      color: 'var(--text-secondary-color)',
+      color: 'text.secondary',
     },
     message: {
       textStyle: 'caption',
-      color: 'var(--text-secondary-color)',
+      color: 'text.secondary',
     },
     inputContainer: {
       display: 'flex',
       gap: '4px',
       paddingBottom: '8px',
-      borderBottom: '1px solid var(--text-tertiary-color)',
+      borderBottom: '1px solid text.tertiary',
     },
     inputWrapper: {
       display: 'flex',
@@ -50,26 +50,26 @@ const textInput = sva({
       outline: 'none',
       textStyle: 'body2',
       flexGrow: 1,
-      color: 'var(--text-primary-color)',
+      color: 'text.primary',
       _placeholder: {
-        color: 'var(--text-secondary-color)',
+        color: 'text.secondary',
       },
     },
-    clearBtn: { cursor: 'pointer', fill: 'var(--text-secondary-color)' },
+    clearBtn: { cursor: 'pointer', fill: 'text.secondary' },
   },
   variants: {
     type: {
       base: {},
       error: {
-        inputContainer: { borderBottomColor: 'var(--text-error-color)' },
-        message: { color: 'var(--text-error-color)' },
+        inputContainer: { borderBottomColor: 'text.error' },
+        message: { color: 'text.error' },
       },
       disabled: {
-        label: { color: 'var(--text-disable-color)' },
-        message: { color: 'var(--text-disable-color)' },
-        inputContainer: { borderBottomColor: 'var(--text-disable-color)' },
-        input: { color: 'var(--text-disable-color)' },
-        clearBtn: { fill: 'var(--text-disable-color)' },
+        label: { color: 'text.disable' },
+        message: { color: 'text.disable' },
+        inputContainer: { borderBottomColor: 'text.disable' },
+        input: { color: 'text.disable' },
+        clearBtn: { fill: 'text.disable' },
       },
     },
   },
@@ -81,21 +81,23 @@ const textInput = sva({
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ hasClear, label, message, beforeContent, afterContent, ...props }, ref) => {
     const classes = textInput({ type: props.disabled ? 'disabled' : props.hasError ? 'error' : 'base' });
-    const [value, setValue] = useState(props.value ?? '');
+    const [internalValue, setInternalValue] = useState(props.defaultValue ?? '');
     const isControlledInput = props.value !== undefined;
     const internalId = useId();
     const id = props.id ?? internalId;
+    const value = isControlledInput ? props.value : internalValue;
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
       if (!isControlledInput) {
-        setValue(e.target.value);
+        setInternalValue(newValue);
       }
-      props.onChange?.(e.target.value);
+      props.onChange?.(newValue);
     };
 
     const onClearInput = () => {
       if (!isControlledInput) {
-        setValue('');
+        setInternalValue('');
       }
       props.onChange?.('');
     };

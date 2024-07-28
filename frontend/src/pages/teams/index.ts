@@ -1,0 +1,1 @@
+export { SearchTeamPage } from './ui';

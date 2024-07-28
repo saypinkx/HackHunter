@@ -12,12 +12,12 @@ const skeletonCls = css({
   height: '100%',
   borderRadius: '8px',
   overflow: 'hidden',
-  backgroundColor: 'var(--background-skeleton-color)',
+  backgroundColor: 'bg.skeleton',
 
   _after: {
     position: 'absolute',
     inset: 0,
-    backgroundImage: 'linear-gradient(calc(90deg),transparent,var(--background-skeleton-color))',
+    backgroundImage: 'linear-gradient(calc(90deg),transparent,bg.skeleton)',
     animation: 'skeleton 1.2s ease-out infinite',
     content: '""',
   },
