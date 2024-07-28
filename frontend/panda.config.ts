@@ -80,7 +80,7 @@ export default defineConfig({
             secondary: { value: '#f4f5f7' },
             tertiary: { value: '#f0f0f2' },
             skeleton: { value: '#e7e8e990' },
-            popup: { value: '#0e0e0f' },
+            popup: { value: '#0e0e0f80' },
           },
         },
       },
