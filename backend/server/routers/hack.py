@@ -30,7 +30,7 @@ async def create_hackathon(schema: Annotated[SchemaCreate, Body()]):
 
 
 @router.get('', status_code=200, response_model=list[SchemaResponse])
-@cache(expire=30)
+@cache
 async def get_all_hackathons(end: Annotated[bool, Query()] = None):
     nodes = await Manager.all(end=end)
     return await Manager.all_response(nodes)

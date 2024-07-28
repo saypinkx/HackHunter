@@ -33,7 +33,7 @@ async def create_team(schema: Annotated[TeamCreate, Body()]):
 
 
 @router.get('', status_code=200, response_model=list[TeamResponse])
-@cache(expire=30)
+@cache
 async def get_all_teams(hunt: Annotated[bool, Query()] = None):
     teams = await Team.all(hunt=hunt)
     return await Team.all_response(teams)
