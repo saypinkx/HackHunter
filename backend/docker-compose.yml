@@ -3,7 +3,7 @@ services:
   mongodb:
     image: mongo:3.1
     env_file:
-      - mongo/.env-prod
+      - mongo.conf
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
@@ -18,7 +18,7 @@ services:
     container_name: redis
     restart: unless-stopped
     volumes:
-      - redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - 6379:6379
     command: redis-server /usr/local/etc/redis/redis.conf
