@@ -1,17 +1,24 @@
 version: "3.7"
 services:
   mongodb:
-    image: mongo:4.4.7-focal
+    image: mongo:3.5
+    env_file:
+      - mongo/.env-prod
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
     ports:
       - 27017:27017
     volumes:
       - /data/db:/data/db
+    restart: unless-stopped
+
   redis:
     image: redis:6
     container_name: redis
     restart: unless-stopped
     volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis/redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - 6379:6379
     command: redis-server /usr/local/etc/redis/redis.conf
@@ -25,6 +32,7 @@ services:
     container_name: server
     ports:
       - 8000:8000
+    restart: unless-stopped
     depends_on:
       - mongodb
       - redis
@@ -43,6 +51,7 @@ services:
     command: celery -A api.worker:celery worker --loglevel=INFO
     ports:
       - 6162:6162
+    restart: unless-stopped
     env_file:
       - server/.env-prod
     environment:
@@ -62,6 +71,7 @@ services:
     command: celery -A api.worker:celery flower
     ports:
       - 5555:5555
+    restart: unless-stopped
     depends_on:
       - server
       - redis
@@ -78,6 +88,8 @@ services:
     container_name: seleniumHub
     ports:
       - "4444:4444"
+    restart: unless-stopped
+
 
   chrome:
     image: selenium/node-chrome:4.0.0-rc-2-20210930
@@ -89,12 +101,14 @@ services:
       - SE_NODE_MAX_SESSIONS=3
     depends_on:
       - hub
+    restart: unless-stopped
   extractor:
     build:
       context: extractor
       dockerfile: Dockerfile
     env_file:
       - extractor/.env-prod
+    restart: unless-stopped
     container_name: extractor
     depends_on:
       - mongodb
