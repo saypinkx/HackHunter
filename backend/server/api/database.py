@@ -4,9 +4,14 @@ from config import DB_NAME, DB_HOST, DB_PORT, MONGO_INITDB_ROOT_PASSWORD, MONGO_
 
 class Database:
     def __init__(self):
-        self.client = motor_asyncio.AsyncIOMotorClient(F"{DB_NAME}://{MONGO_INITDB_ROOT_USERNAME}:{MONGO_INITDB_ROOT_PASSWORD}@{DB_HOST}:{DB_PORT}")
+        self.client = motor_asyncio.AsyncIOMotorClient(F"{DB_NAME}://{DB_HOST}:{DB_PORT}")
+        if DB_HOST != "localhost":
+            self.client = motor_asyncio.AsyncIOMotorClient(
+                F"{DB_NAME}://{MONGO_INITDB_ROOT_USERNAME}:{MONGO_INITDB_ROOT_PASSWORD}@{DB_HOST}:{DB_PORT}")
+
+        # self.client = motor_asyncio.AsyncIOMotorClient(
+        #     F"{DB_NAME}://{MONGO_INITDB_ROOT_USERNAME}:{MONGO_INITDB_ROOT_PASSWORD}@{DB_HOST}:{DB_PORT}")
         self.database = self.client.HackHunter
 
 
 DB = Database().database
-
