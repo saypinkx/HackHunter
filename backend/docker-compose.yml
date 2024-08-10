@@ -6,9 +6,11 @@ services:
     volumes:
       - /data3/db:/data/db
     restart: unless-stopped
-    environment:
-     MONGO_INITDB_ROOT_USERNAME: root
-     MONGO_INITDB_ROOT_PASSWORD: root
+    env_file:
+      - mongo.conf
+#    environment:
+#     MONGO_INITDB_ROOT_USERNAME: root
+#     MONGO_INITDB_ROOT_PASSWORD: root
     command: [--auth]
   redis:
     image: redis:6
