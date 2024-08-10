@@ -1,18 +1,15 @@
-version: "3.7"
 services:
   mongodb:
-    image: mongo:3.5
-    env_file:
-      - mongo.conf
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    image: mongo:5.0
     ports:
       - 27017:27017
     volumes:
-      - /data/db:/data/db
+      - /data3/db:/data/db
     restart: unless-stopped
-
+    environment:
+     MONGO_INITDB_ROOT_USERNAME: root
+     MONGO_INITDB_ROOT_PASSWORD: root
+    command: [--auth]
   redis:
     image: redis:6
     container_name: redis
@@ -122,3 +119,4 @@ services:
 volumes:
   db:
   redis.conf:
+
