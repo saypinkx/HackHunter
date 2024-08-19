@@ -57,7 +57,8 @@ class Inspector:
     @staticmethod
     def create_access_token(chat_id: int):
         to_encode = {'sub': chat_id}
-        to_encode.update({"exp": int(TOKEN_EXPIRE_MINUTES)})
+        expire = datetime.now(timezone.utc) + timedelta(minutes=int(TOKEN_EXPIRE_MINUTES))
+        to_encode.update({"exp": expire})
 
         encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
         return encoded_jwt

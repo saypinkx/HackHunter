@@ -17,7 +17,7 @@ async def registration(schema: Annotated[UserRegister, Body()]):
     return 'Ok'
 
 
-@user_router.post('/login', status_code=200)
+@user_router.post('/token', status_code=200)
 async def get_token(schema: Annotated[UserLogin, Body()]):
     result = await Inspector.authenticate(login=schema.login, password=schema.password, chat_id=schema.chat_id)
     if result[1] != 'Ok':

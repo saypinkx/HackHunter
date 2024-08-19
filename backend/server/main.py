@@ -17,7 +17,8 @@ from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache.decorator import cache
 from config import REDIS_NAME, REDIS_PORT, REDIS_HOST
 from routers.invite import router as invite_router
-app = FastAPI()
+from dependencies.main import VerifyToken, CurrentUserChatId
+app = FastAPI(dependencies=[VerifyToken, CurrentUserChatId])
 app.include_router(user_router)
 app.include_router(invite_router)
 app.include_router(avatar_router)
